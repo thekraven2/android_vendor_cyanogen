@@ -1,0 +1,41 @@
+# Include the stock APNS config file instead of the dev one
+PRODUCT_COPY_FILES := \
+    vendor/cyanogen/prebuilt/common/etc/apns-conf.xml:system/etc/apns-conf.xml \
+    device/lge/thunderc/files/media/DroidSans.ttf:system/fonts/DroidSans.ttf \
+    device/lge/thunderc/files/media/DroidSans-Bold.ttf:system/fonts/DroidSans-Bold.ttf \
+    device/lge/thunderc/files/media/Clockopia.ttf:system/fonts/Clockopia.ttf \
+    $(PRODUCT_COPY_FILES)
+
+# Inherit device configuration for olympus.
+$(call inherit-product, device/moto/sunfire/sunfire.mk)
+
+# Inherit some common cyanogenmod stuff.
+$(call inherit-product, vendor/cyanogen/products/common_full.mk)
+
+# Include GSM stuff
+$(call inherit-product, vendor/cyanogen/products/gsm.mk)
+
+#
+# Setup device specific product configuration.
+#
+PRODUCT_NAME := cyanogen_sunfire
+PRODUCT_BRAND := motorola
+PRODUCT_DEVICE := sunfire
+PRODUCT_MODEL := MB855
+PRODUCT_MANUFACTURER := Motorola
+PRODUCT_BUILD_PROP_OVERRIDES += PRODUCT_BRAND=MOTO PRODUCT_NAME=olyatt BUILD_ID=4.5.91 BUILD_PRODUCT=olyatt BUILD_FINGERPRINT=MOTO/olyatt/sunfire:2.3.4/4.5.91/110625:user/release-keys PRIVATE_BUILD_DESC="sunfire-user 2.3.4 4.5.91 110625 release-keys"
+
+# Extra Olympus overlay
+PRODUCT_PACKAGE_OVERLAYS += \
+	vendor/cyanogen/overlay/sunfire \
+#	vendor/cyanogen/overlay/qhd
+
+PRODUCT_RELEASE_NAME := Sunfire
+PRODUCT_VERSION_DEVICE_SPECIFIC :=
+-include vendor/cyanogen/products/common_versions.mk
+
+#
+# Copy hdpi specific prebuilt files
+#
+PRODUCT_COPY_FILES +=  \
+    vendor/cyanogen/prebuilt/hdpi/media/bootanimation.zip:system/media/bootanimation.zip
